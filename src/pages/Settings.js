@@ -1,11 +1,14 @@
 import { useState } from "react";
 const Settings = () => {
   const [inputs, setInputs] = useState({});
+  const [username, setUsername] = useState("");
 
   const handleChange = (event) => {
-    const name = event.target.name;
+    event.preventDefault();
+    const username = event.target.username;
     const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setInputs((values) => ({ ...values, [username]: value }));
+    this.setState({ value: event.target.value });
   };
 
   const handleSubmit = (event) => {
@@ -33,7 +36,15 @@ const Settings = () => {
           onChange={handleChange}
         />
       </label>
-      <input type="submit" />
+      <label>
+        Amount of Questions:
+        <select value={[10, 20, 30]} name="quiz-length">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </label>
+      <input type="submit" name="submit" value="Start Quiz" />
     </form>
   );
 };
